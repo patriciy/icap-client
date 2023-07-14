@@ -46,6 +46,9 @@ func ReadResponse(b *bufio.Reader) (*Response, error) {
 	httpMsg := ""
 	for currentMsg, err := b.ReadString('\n'); err == nil || currentMsg != ""; currentMsg, err = b.ReadString('\n') { // keep reading the buffer message which is the http response message
 
+		if currentMsg == "98\r\n" { //e2g hack
+			currentMsg = "\r\n"
+		}
 		if isRequestLine(currentMsg) { // if the current message line if the first line of the message portion(request line)
 			ss := strings.Split(currentMsg, " ")
 

@@ -119,5 +119,8 @@ func (t *transport) read() (string, error) {
 
 // close closes the tcp connection
 func (t *transport) close() error {
+	if t == nil || t.sckt == nil {
+		return nil
+	}
 	return t.sckt.Close()
 }

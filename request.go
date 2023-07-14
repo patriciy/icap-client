@@ -64,8 +64,7 @@ func DumpRequest(req *Request) ([]byte, error) {
 		}
 	}
 
-	reqStr += "Encapsulated: %s" + CRLF // will populate the Encapsulated header value after making the http Request & Response messages
-	reqStr += CRLF
+	reqStr += "Encapsulated: %s" + CRLF + CRLF // will populate the Encapsulated header value after making the http Request & Response messages
 
 	// Making the HTTP Request message block
 
@@ -149,7 +148,11 @@ func DumpRequest(req *Request) ([]byte, error) {
 		addFullBodyInPreviewIndicator(&httpReqStr)
 	}
 
-	data := []byte(reqStr + httpReqStr + httpRespStr)
+	ending := ""
+	//if req.Method == "OPTIONS" {
+	ending = bodyEndIndicator
+	//}
+	data := []byte(reqStr + httpReqStr + httpRespStr + ending)
 
 	return data, nil
 }

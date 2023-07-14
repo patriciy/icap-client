@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"io/ioutil"
 	"net/http"
-	"os"
 	"strconv"
 )
 
@@ -88,7 +87,7 @@ func (r *Request) SetDefaultRequestHeaders() {
 		r.Header.Add("Allow", "204") // assigning 204 by default if Allow not provided
 	}
 	if _, exists := r.Header["Host"]; !exists {
-		hostName, _ := os.Hostname()
+		hostName := r.URL.Host
 		r.Header.Add("Host", hostName)
 	}
 }

@@ -43,7 +43,7 @@ func isRequestLine(str string) bool {
 
 // setEncapsulatedHeaderValue generates the Encapsulated  values and assigns to the ICAP request string
 func setEncapsulatedHeaderValue(icapReqStr *string, httpReqStr, httpRespStr string) {
-	encpVal := " "
+	encpVal := ""
 
 	if strings.HasPrefix(*icapReqStr, MethodOPTIONS) { // if the request method is OPTIONS
 		if httpReqStr == "" && httpRespStr == "" { // the most common case for OPTIONS method, no Encapsulated body
